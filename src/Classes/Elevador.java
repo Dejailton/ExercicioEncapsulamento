@@ -14,41 +14,47 @@ public class Elevador {
     public void Inicializa(int capacidadeElevador, int totalAndares) {
         this.andarAtual = 0;
         this.pessoasElevador = 0;
-        System.out.println("Elevador inicializado:");
-        System.out.printf("Andar atual: %s", andarAtual);
-        System.out.printf("Pessoas no elevador: %s", pessoasElevador);
+        System.out.println("Elevador inicializado");
+        imprimirStatus();
     }
     public void Entra(int capacidadeElevador) {
         if (pessoasElevador < capacidadeElevador) {
+            pessoasElevador++;
             System.out.println("Entrou uma pessoa no elevador");
+            imprimirStatus();
+        } else {
+            System.out.println("Elevador atingiu a capacidade máxima");
         }
     }
     public void Sai() {
-        if (this.pessoasElevador < 0) {
-            System.out.println("Não há pessoas no elevador");
+        if (this.pessoasElevador > 0) {
+            this.pessoasElevador--;
+            System.out.println("Saiu uma pessoa do elevador");
+            imprimirStatus();
         } else {
-            this.pessoasElevador -= 1;
-            System.out.printf("Saiu uma pessoa do elevador, atualmente tem %s pessoas no elevador", pessoasElevador);
+            System.out.println("Não há pessoas no elevador");
         }
-
     }
     public void Sobe() {
         if (this.andarAtual < totalAndares) {
-            System.out.println("Subiu um andar");
-            System.out.printf("Andar atual: %s", andarAtual);
-            System.out.printf("Quantidade de pessoas no elevador: %s", pessoasElevador);
             this.andarAtual++;
+            System.out.println("O elevador subiu um andar");
+            imprimirStatus();
         } else if (this.andarAtual == this.totalAndares) {
-            System.out.println("Você já está no último andar.");
+            System.out.println("Você está no último andar, não é possível subir um andar.");
         }
     }
     public void Desce() {
         if (andarAtual == 0) {
-            System.out.println("Você já está no térreo");
+            System.out.println("Você está no térreo, não é possível descer um andar.");
         } else {
+            this.andarAtual--;
             System.out.println("Você desceu um andar");
-            System.out.printf("Andar atual: %s", andarAtual);
-            System.out.printf("Pessoas no elevador: %s", pessoasElevador);
+            imprimirStatus();
         }
+    }
+    public void imprimirStatus() {
+        System.out.printf("Andar atual: %s \n", andarAtual == 0 ? "térreo" : andarAtual);
+        System.out.printf("Pessoas no elevador: %s \n", pessoasElevador);
     }
 }

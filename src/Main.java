@@ -2,14 +2,13 @@ import Classes.Pessoa;
 import Classes.JogadorFutebol;
 import Classes.Elevador;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean running = true;
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -46,7 +45,7 @@ public class Main {
                     Pessoa p = new Pessoa(nomePessoa, dataNascimentoPessoa, alturaPessoa);
                     p.imprimirDados();
                     sc.nextLine();
-                    System.out.println();
+                    System.out.println("Saindo da classe Pessoa...");
                     break;
                 case "2":
                     System.out.println("Digite seu nome:");
@@ -98,14 +97,78 @@ public class Main {
                     JogadorFutebol jogadorFutebol = new JogadorFutebol(nomeJogador, posicaoJogador, dataNascimentoJogador, nacionalidadeJogador, alturaJogador, pesoJogador);
                     jogadorFutebol.imprimirDados();
                     sc.nextLine();
+                    System.out.println("Saindo da classe Jogador de Futebol...");
                     break;
                 case "3":
-                    System.out.println("Digite o total de andares do elevador");
-                    int totalAndar = sc.nextInt();
+                    System.out.println("Digite o total de andares do elevador:");
+                    int totalAndares = sc.nextInt();
 
-                    System.out.println("Digite a capacidade total de pessoas por andar");
-                    int capacidade
-                    Elevador elevador = new Elevador()
+                    System.out.println("Digite a capacidade total de pessoas que o elevador suporta:");
+                    int capacidadeElevador = sc.nextInt();
+                    sc.nextLine(); // limpar newline pendente
+                    Elevador elevador = new Elevador(totalAndares, capacidadeElevador);
+
+                    boolean elevadorInicializado = false;
+                    boolean inElevatorMenu = true;
+                    while (inElevatorMenu) {
+                        System.out.printf("-".repeat(30) + "\n");
+                        System.out.println("Menu do Elevador - escolha uma opção:");
+                        System.out.println("1 - Inicializa");
+                        System.out.println("2 - Entra");
+                        System.out.println("3 - Sai");
+                        System.out.println("4 - Sobe");
+                        System.out.println("5 - Desce");
+                        System.out.println("6 - Sair da classe");
+                        System.out.printf("-".repeat(30) + "\n");
+
+                        String opcElev = sc.nextLine();
+                        switch (opcElev) {
+                            case "1":
+                                if (!elevadorInicializado) {
+                                    elevador.Inicializa(capacidadeElevador, totalAndares);
+                                    elevadorInicializado = true;
+                                } else {
+                                    System.out.println("Elevador já inicializado.");
+                                }
+                                break;
+                            case "2":
+                                if (!elevadorInicializado) {
+                                    System.out.println("Elevador não inicializado. Escolha 1 para inicializar o elevador.");
+                                } else {
+                                    elevador.Entra(capacidadeElevador);
+                                }
+                                break;
+                            case "3":
+                                if (!elevadorInicializado) {
+                                    System.out.println("Elevador não inicializado. Escolha 1 para inicializar o elevador.");
+                                } else {
+                                    elevador.Sai();
+                                }
+                                break;
+                            case "4":
+                                if (!elevadorInicializado) {
+                                    System.out.println("Elevador não inicializado. Escolha 1 para inicializar o elevador.");
+                                } else {
+                                    elevador.Sobe();
+                                }
+                                break;
+                            case "5":
+                                if (!elevadorInicializado) {
+                                    System.out.println("Elevador não inicializado. Escolha 1 para inicializar o elevador.");
+                                } else {
+                                    elevador.Desce();
+                                }
+                                break;
+                            case "6":
+                                System.out.println("Saindo da classe Elevador...");
+                                inElevatorMenu = false;
+                                break;
+                            default:
+                                System.out.println("Opção inválida. Tente novamente.");
+                                break;
+                        }
+                    }
+
                     break;
                 case "4":
                     System.out.println("Saindo da aplicação...");
