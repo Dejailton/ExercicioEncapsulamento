@@ -6,11 +6,11 @@ import java.time.format.DateTimeFormatter;
 
 public class JogadorFutebol {
     private String nome;
-    String posicao;
-    LocalDate dataNascimento;
-    String nacionalidade;
-    double altura;
-    double peso;
+    private String posicao;
+    private LocalDate dataNascimento;
+    private String nacionalidade;
+    private double altura;
+    private double peso;
 
     public JogadorFutebol(String nome, String posicao, LocalDate dataNascimento, String nacionalidade, double altura, double peso) {
         this.nome = nome;
